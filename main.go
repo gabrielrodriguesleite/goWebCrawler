@@ -12,11 +12,11 @@ func main() {
 
 	resp, err := http.Get(url)
 	if err != nil {
-		panic(err)
+		panic(fmt.Sprintf("Não foi possível acessar: %s\nErro: %v", url, err))
 	}
 
 	if resp.StatusCode != http.StatusOK {
-		panic("Status code diferente de 200")
+		panic(fmt.Sprintf("Status code diferente de 200: %v", resp.StatusCode))
 	}
 
 	fmt.Println("Body:", resp.Body)
