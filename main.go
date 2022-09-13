@@ -4,21 +4,28 @@ import (
 	"fmt"
 	"net/http"
 	"net/url"
+	"time"
 
+	"github.com/gabrielrodriguesleite/goWebCrawler/db"
 	"golang.org/x/net/html"
 )
 
 var (
-	links   []string
 	visited map[string]bool = map[string]bool{}
 )
+
+type VisitedLink struct {
+	Website     string    `bson:"website"`
+	Link        string    `bson:"link"`
+	VisitedDate time.Time `bson:"visited_date"`
+}
 
 func main() {
 	fmt.Println("Web Crawler Go v1.0.0")
 
 	visitLink("https://aprendagolang.com.br")
 
-	fmt.Println("Qtd links: ", len(links))
+	// fmt.Println("Qtd links: ", len(links))
 }
 
 func visitLink(url string) {
@@ -60,7 +67,13 @@ func extractLinks(element *html.Node) {
 				continue
 			}
 
-			links = append(links, link.String())
+			visitedLink := VisitedLink{
+				Website:     link.Host,
+				Link:        link.String(),
+				VisitedDate: time.Now(),
+			}
+
+			db.Insert("links", visitedLink)
 
 			visitLink(link.String())
 			// fmt.Println(attr.Val)
