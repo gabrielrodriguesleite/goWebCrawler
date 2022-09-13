@@ -8,7 +8,10 @@ import (
 	"golang.org/x/net/html"
 )
 
-var links []string
+var (
+	links   []string
+	visited map[string]bool = map[string]bool{}
+)
 
 func main() {
 	fmt.Println("Web Crawler Go v1.0.0")
@@ -19,6 +22,11 @@ func main() {
 }
 
 func visitLink(url string) {
+	if ok := visited[url]; ok {
+		return
+	}
+
+	visited[url] = true
 	fmt.Println("Visitando: ", url)
 	resp, err := http.Get(url)
 	if err != nil {
