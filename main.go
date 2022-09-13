@@ -33,5 +33,11 @@ func main() {
 }
 
 func linkVisited(body *html.Node) {
+	if body.Type == html.ElementNode && body.Data == "a" {
+		fmt.Println(body.Data)
+	}
 
+	for c := body.FirstChild; c != nil; c = c.NextSibling {
+		linkVisited(c)
+	}
 }
