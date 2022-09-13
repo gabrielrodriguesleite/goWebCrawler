@@ -18,7 +18,7 @@ func main() {
 	}
 
 	if resp.StatusCode != http.StatusOK {
-		panic(fmt.Sprintf("Status code diferente de 200: %v", resp.StatusCode))
+		panic(fmt.Sprintf("[Erro] Status code diferente de 200: %v", resp.StatusCode))
 	}
 
 	// fmt.Println("Body:", resp.Body)
