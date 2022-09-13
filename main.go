@@ -13,8 +13,12 @@ var links []string
 func main() {
 	fmt.Println("Web Crawler Go v1.0.0")
 
-	url := "https://aprendagolang.com.br"
+	visitLink("https://aprendagolang.com.br")
 
+	fmt.Println("Qtd links: ", len(links))
+}
+
+func visitLink(url string) {
 	resp, err := http.Get(url)
 	if err != nil {
 		panic(fmt.Sprintf("Não foi possível acessar: %s\nErro: %v", url, err))
@@ -33,8 +37,6 @@ func main() {
 
 	// fmt.Println("Body: ", body)
 	extractLinks(element)
-
-	fmt.Println("Qtd links: ", len(links))
 }
 
 func extractLinks(element *html.Node) {
@@ -50,6 +52,8 @@ func extractLinks(element *html.Node) {
 			}
 
 			links = append(links, link.String())
+
+			visitLink(link.String())
 			// fmt.Println(attr.Val)
 		}
 	}
