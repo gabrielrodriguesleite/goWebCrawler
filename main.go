@@ -23,21 +23,21 @@ func main() {
 	}
 
 	// fmt.Println("Body:", resp.Body)
-	body, err := html.Parse(resp.Body)
+	element, err := html.Parse(resp.Body)
 	if err != nil {
 		panic(fmt.Sprintf("Erro ao traduzir html: %v", err))
 	}
 
 	// fmt.Println("Body: ", body)
-	extractLinks(body)
+	extractLinks(element)
 }
 
-func extractLinks(body *html.Node) {
-	if body.Type == html.ElementNode && body.Data == "a" {
-		fmt.Println(body.Data)
+func extractLinks(element *html.Node) {
+	if element.Type == html.ElementNode && element.Data == "a" {
+		fmt.Println(element.Data)
 	}
 
-	for c := body.FirstChild; c != nil; c = c.NextSibling {
+	for c := element.FirstChild; c != nil; c = c.NextSibling {
 		extractLinks(c)
 	}
 }
