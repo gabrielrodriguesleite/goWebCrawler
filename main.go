@@ -19,6 +19,7 @@ func main() {
 }
 
 func visitLink(url string) {
+	fmt.Println("Visitando: ", url)
 	resp, err := http.Get(url)
 	if err != nil {
 		panic(fmt.Sprintf("Não foi possível acessar: %s\nErro: %v", url, err))
