@@ -16,6 +16,7 @@ func main() {
 	if err != nil {
 		panic(fmt.Sprintf("Não foi possível acessar: %s\nErro: %v", url, err))
 	}
+	defer resp.Body.Close()
 
 	if resp.StatusCode != http.StatusOK {
 		panic(fmt.Sprintf("[Erro] Status code diferente de 200: %v", resp.StatusCode))
