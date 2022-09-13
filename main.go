@@ -27,5 +27,10 @@ func main() {
 		panic(fmt.Sprintf("Erro ao traduzir html: %v", err))
 	}
 
-	fmt.Println("Body: ", body)
+	// fmt.Println("Body: ", body)
+	linkVisited(body)
+}
+
+func linkVisited(body *html.Node) {
+
 }
