@@ -3,6 +3,7 @@ package main
 import (
 	"fmt"
 	"net/http"
+	"net/url"
 
 	"golang.org/x/net/html"
 )
@@ -32,12 +33,24 @@ func main() {
 
 	// fmt.Println("Body: ", body)
 	extractLinks(element)
+
+	fmt.Println("Qtd links: ", len(links))
 }
 
 func extractLinks(element *html.Node) {
 	if element.Type == html.ElementNode && element.Data == "a" {
 		for _, attr := range element.Attr {
-			fmt.Println(attr.Key)
+			if attr.Key != "href" {
+				continue // continua buscando até achar href
+			}
+
+			link, err := url.Parse(attr.Val)
+			if err != nil || link.Scheme == "" {
+				continue
+			}
+
+			links = append(links, link.String())
+			// fmt.Println(attr.Val)
 		}
 	}
 
