@@ -7,6 +7,8 @@ import (
 	"golang.org/x/net/html"
 )
 
+var links []string
+
 func main() {
 	fmt.Println("Web Crawler Go v1.0.0")
 
@@ -34,7 +36,9 @@ func main() {
 
 func extractLinks(element *html.Node) {
 	if element.Type == html.ElementNode && element.Data == "a" {
-		fmt.Println(element.Data)
+		for _, attr := range element.Attr {
+			fmt.Println(attr.Key)
+		}
 	}
 
 	for c := element.FirstChild; c != nil; c = c.NextSibling {
