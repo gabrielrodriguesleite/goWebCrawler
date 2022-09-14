@@ -7,5 +7,8 @@ visitarDB:
 		show collections\n- db.links.countDocuments()\n- db.links.find({})'
 	@docker exec -it mongodb /bin/bash
 
-run:
+runCrawler:
+	@go run main.go -action=webcrawler
+
+runWebsite:
 	@go run main.go
