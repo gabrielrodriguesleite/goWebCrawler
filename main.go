@@ -12,10 +12,14 @@ import (
 	"golang.org/x/net/html"
 )
 
-var link string
+var (
+	link   string
+	action string
+)
 
 func init() {
 	flag.StringVar(&link, "url", "https://aprendagolang.com.br", "url para iniciar visitas")
+	flag.StringVar(&action, "action", "website", "qual serviço usar")
 }
 
 type VisitedLink struct {
@@ -25,12 +29,19 @@ type VisitedLink struct {
 }
 
 func main() {
+	flag.Parse()
 	fmt.Println("Web Crawler Go v1.0.0")
-	website.Run()
-	// done := make(chan bool)
-	// flag.Parse()
-	// go visitLink(link)
-	// <-done
+
+	switch action {
+	case "website":
+		website.Run()
+	case "webcrawler":
+		done := make(chan bool)
+		go visitLink(link)
+		<-done
+	default:
+		fmt.Printf("Action não reconhecida: %s\n", action)
+	}
 }
 
 func visitLink(url string) {
