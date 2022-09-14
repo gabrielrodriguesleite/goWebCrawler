@@ -33,7 +33,7 @@ func visitLink(url string) {
 	defer resp.Body.Close()
 
 	if resp.StatusCode != http.StatusOK {
-		panic(fmt.Sprintf("[Erro] Status code diferente de 200: %v", resp.StatusCode))
+		fmt.Printf("[Erro] Status code diferente de 200: %v\n", resp.StatusCode)
 	}
 
 	element, err := html.Parse(resp.Body)
