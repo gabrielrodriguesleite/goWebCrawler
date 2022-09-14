@@ -7,7 +7,7 @@ import (
 	"go.mongodb.org/mongo-driver/mongo/options"
 )
 
-func VisitedLink(link string) bool {
+func CheckVisitedLink(link string) bool {
 	client, ctx := getConnection()
 	defer client.Disconnect(ctx)
 
