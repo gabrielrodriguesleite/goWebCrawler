@@ -18,7 +18,7 @@ type VisitedLink struct {
 
 func main() {
 	fmt.Println("Web Crawler Go v1.0.0")
-	visitLink("https://aprendagolang.com.br")
+	go visitLink("https://aprendagolang.com.br")
 }
 
 func visitLink(url string) {
@@ -67,7 +67,7 @@ func extractLinks(element *html.Node) {
 
 			db.Insert("links", visitedLink)
 
-			visitLink(link.String())
+			go visitLink(link.String())
 		}
 	}
 
