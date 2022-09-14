@@ -22,12 +22,6 @@ func init() {
 	flag.StringVar(&action, "action", "website", "qual serviço usar")
 }
 
-type VisitedLink struct {
-	Website     string    `bson:"website"`
-	Link        string    `bson:"link"`
-	VisitedDate time.Time `bson:"visited_date"`
-}
-
 func main() {
 	flag.Parse()
 	fmt.Println("Web Crawler Go v1.0.0")
@@ -77,12 +71,12 @@ func extractLinks(element *html.Node) {
 				continue
 			}
 
-			if db.VisitedLink(link.String()) {
+			if db.CheckVisitedLink(link.String()) {
 				fmt.Printf("link já visitado: %s\n", link)
 				continue
 			}
 
-			visitedLink := VisitedLink{
+			visitedLink := db.VisitedLink{
 				Website:     link.Host,
 				Link:        link.String(),
 				VisitedDate: time.Now(),
