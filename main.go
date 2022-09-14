@@ -8,6 +8,7 @@ import (
 	"time"
 
 	"github.com/gabrielrodriguesleite/goWebCrawler/db"
+	"github.com/gabrielrodriguesleite/goWebCrawler/website"
 	"golang.org/x/net/html"
 )
 
@@ -24,11 +25,12 @@ type VisitedLink struct {
 }
 
 func main() {
-	done := make(chan bool)
 	fmt.Println("Web Crawler Go v1.0.0")
-	flag.Parse()
-	go visitLink(link)
-	<-done
+	website.Run()
+	// done := make(chan bool)
+	// flag.Parse()
+	// go visitLink(link)
+	// <-done
 }
 
 func visitLink(url string) {
