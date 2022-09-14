@@ -28,11 +28,13 @@
     </thead>
 
     <tbody>
+      {{ range .Links }}
       <tr>
-        <td></td>
-        <td></td>
-        <td></td>
+        <td>{{.Website}}</td>
+        <td>{{.Link}}</td>
+        <td>{{.VisitedDate}}</td>
       </tr>
+      {{end}}
     </tbody>
 
   </table>
