@@ -60,7 +60,7 @@ func extractLinks(element *html.Node) {
 			}
 
 			link, err := url.Parse(attr.Val)
-			if err != nil || link.Scheme == "" {
+			if err != nil || link.Scheme == "" || link.Scheme != "https" {
 				continue
 			}
 
