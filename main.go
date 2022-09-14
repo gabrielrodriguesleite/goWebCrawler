@@ -1,6 +1,7 @@
 package main
 
 import (
+	"flag"
 	"fmt"
 	"net/http"
 	"net/url"
@@ -9,6 +10,12 @@ import (
 	"github.com/gabrielrodriguesleite/goWebCrawler/db"
 	"golang.org/x/net/html"
 )
+
+var link string
+
+func init() {
+	flag.StringVar(&link, "url", "https://aprendagolang.com.br", "url para iniciar visitas")
+}
 
 type VisitedLink struct {
 	Website     string    `bson:"website"`
@@ -19,7 +26,8 @@ type VisitedLink struct {
 func main() {
 	done := make(chan bool)
 	fmt.Println("Web Crawler Go v1.0.0")
-	go visitLink("https://aprendagolang.com.br")
+	flag.Parse()
+	go visitLink(link)
 	<-done
 }
 
