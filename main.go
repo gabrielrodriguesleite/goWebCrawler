@@ -17,8 +17,10 @@ type VisitedLink struct {
 }
 
 func main() {
+	done := make(chan bool)
 	fmt.Println("Web Crawler Go v1.0.0")
 	go visitLink("https://aprendagolang.com.br")
+	<-done
 }
 
 func visitLink(url string) {
