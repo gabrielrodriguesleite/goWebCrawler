@@ -23,12 +23,22 @@ func main() {
 	fmt.Println("Web Crawler Go v1.0.0")
 
 	switch action {
+
 	case "website":
 		website.Run()
+
 	case "webcrawler":
+
 		done := make(chan bool)
-		go crawler.VisitLink(link)
+		wc := crawler.New()
+		go wc.VisitLink(link)
+
+		for log := range wc.Log() {
+			fmt.Println(log)
+		}
+
 		<-done
+
 	default:
 		fmt.Printf("Action não reconhecida: %s\n", action)
 	}
