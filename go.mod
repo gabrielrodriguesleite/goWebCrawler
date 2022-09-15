@@ -5,6 +5,7 @@ go 1.18
 require (
 	go.mongodb.org/mongo-driver v1.10.2
 	golang.org/x/net v0.0.0-20220909164309-bea034e7d591
+	nhooyr.io/websocket v1.8.7
 )
 
 require (
